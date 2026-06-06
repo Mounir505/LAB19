@@ -88,76 +88,69 @@ La vidéo de démonstration fournie comme livrable suit précisément ce protoco
 5\. Démonstration Vidéo
 -----------------------
 
-Une vidéo de démonstration a été réalisée afin de valider l'ensemble des fonctionnalités développées dans le cadre de ce laboratoire. Cette démonstration met en évidence le fonctionnement de l'architecture MVVM, l'intégration de Room, ainsi que le comportement réactif de l'interface utilisateur grâce à LiveData.
+Une vidéo de démonstration a été réalisée afin de valider le bon fonctionnement de l'application ainsi que l'intégration de l'architecture MVVM et de la base de données Room. La démonstration suit les scénarios de test ci-dessous.
 
-### Scénario de démonstration
+### Test 1 : Insertion simple
 
-#### 1. Ajout de nouvelles notes
-
-- Saisie d'un titre et d'une description.
-- Validation de l'enregistrement via le bouton d'ajout.
-- Répétition de l'opération pour plusieurs notes.
+**Procédure :**
+- Ajouter trois notes distinctes à l'aide du formulaire.
 
 **Résultat attendu :**
+- Les trois notes apparaissent immédiatement dans le RecyclerView.
+- Aucun rechargement manuel de l'interface n'est nécessaire.
 
-Chaque nouvelle note apparaît instantanément dans le RecyclerView sans actualisation manuelle de l'interface, démontrant le bon fonctionnement du mécanisme d'observation LiveData.
+### Test 2 : Suppression individuelle
 
-### 2. Mise à jour automatique de l'interface
-
-- Observation du RecyclerView après chaque insertion.
-- Vérification de l'ajout dynamique des éléments.
-
-**Résultat attendu :**
-
-Les modifications de la base Room sont immédiatement propagées à l'interface utilisateur via le ViewModel.
-
-### 3. Test du cycle de vie de l'activité
-
-- Saisie de données dans les champs de formulaire.
-- Rotation de l'émulateur ou du périphérique (Portrait ↔ Paysage).
+**Procédure :**
+- Effectuer un clic long sur une note existante.
 
 **Résultat attendu :**
+- La note sélectionnée est supprimée de la base de données.
+- Elle disparaît instantanément de la liste affichée.
 
-Les données affichées restent disponibles après la recréation de l'activité, démontrant la persistance des informations gérées par le ViewModel.
+### Test 3 : Persistance des données
 
-### 4. Suppression individuelle d'une note
-
-- Sélection d'une note existante.
-- Déclenchement de l'action de suppression.
-
-**Résultat attendu :**
-
-La note disparaît immédiatement de la liste et le RecyclerView applique automatiquement les animations prévues par ListAdapter et DiffUtil.
-
-### 5. Suppression complète des données
-
-- Utilisation de l'option permettant de supprimer toutes les notes.
-- Vérification de l'état de la liste après l'opération.
+**Procédure :**
+- Fermer complètement l'application.
+- Relancer l'application.
 
 **Résultat attendu :**
+- Les notes précédemment enregistrées sont toujours présentes.
+- Les données ont été correctement conservées dans la base Room.
 
-L'ensemble des enregistrements est supprimé de la base de données et l'interface se met à jour automatiquement.
+### Test 4 : Rotation de l'écran
 
-### 6. Validation de la persistance Room
-
-- Fermeture complète de l'application.
-- Relance de l'application après arrêt du processus.
+**Procédure :**
+- Ajouter une ou plusieurs notes.
+- Faire pivoter l'appareil ou l'émulateur (Portrait ↔ Paysage).
 
 **Résultat attendu :**
+- La liste des notes reste cohérente après la rotation.
+- L'écran est recréé sans perte des données observées via le ViewModel.
 
-Les notes précédemment enregistrées sont restaurées depuis la base SQLite gérée par Room, confirmant la persistance locale des données.
+### Test 5 : Suppression globale
 
-### Éléments techniques observés durant la démonstration
+**Procédure :**
+- Cliquer sur le bouton **« SUPPRIMER TOUTES LES NOTES »**.
 
-- Communication entre l'interface utilisateur et le ViewModel.
-- Observation réactive des données via LiveData.
-- Persistance des données à l'aide de Room.
-- Optimisation de l'affichage avec RecyclerView, ListAdapter et DiffUtil.
-- Conservation des données lors des changements de configuration.
+**Résultat attendu :**
+- Toutes les notes sont supprimées de la base de données.
+- Le RecyclerView devient immédiatement vide.
+
+### Validation technique
+
+Cette démonstration permet de vérifier :
+
+- Le fonctionnement de la base de données Room.
+- La communication entre la Vue et le ViewModel.
+- La mise à jour automatique de l'interface via LiveData.
+- La persistance des données après fermeture de l'application.
+- La conservation des données lors des changements de configuration.
+- Le bon fonctionnement des opérations CRUD (Create, Read, Delete).
 
 ### Lien de la vidéo
 
-
+> Remplacer ce texte par le lien vers la vidéo de démonstration ou par le nom du fichier vidéo remis avec le rapport.
 
 https://github.com/user-attachments/assets/8e4f2d71-cf13-401f-b23b-50185258d64c
 
